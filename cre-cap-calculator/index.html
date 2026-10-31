@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CRE Cap Rate & Cash Flow Calculator — Free Tool by Invernomuto</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0f172a; color: #e2e8f0; line-height: 1.6; }
+  .hero { background: linear-gradient(135deg, #064e3b, #065f46); padding: 60px 20px; text-align: center; }
+  .hero h1 { font-size: 2em; color: #fff; margin-bottom: 12px; }
+  .hero p { color: #a7f3d0; font-size: 1.1em; max-width: 600px; margin: 0 auto; }
+  .container { max-width: 900px; margin: 0 auto; padding: 40px 20px; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+  @media (max-width: 700px) { .grid { grid-template-columns: 1fr; } }
+  .card { background: #1e293b; border-radius: 12px; padding: 24px; border: 1px solid #334155; }
+  .card h2 { font-size: 1.2em; color: #6ee7b7; margin-bottom: 16px; }
+  .field { margin-bottom: 14px; }
+  .field label { display: block; font-size: 0.85em; color: #94a3b8; margin-bottom: 4px; }
+  .field input { width: 100%; padding: 10px 12px; border: 1px solid #475569; border-radius: 8px; background: #0f172a; color: #e2e8f0; font-size: 1em; }
+  .field input:focus { outline: none; border-color: #6ee7b7; }
+  .btn { width: 100%; padding: 14px; background: #059669; color: #fff; border: none; border-radius: 8px; font-size: 1.1em; cursor: pointer; margin-top: 10px; }
+  .btn:hover { background: #047857; }
+  .results { background: #1e293b; border-radius: 12px; padding: 24px; border: 1px solid #334155; }
+  .results h2 { font-size: 1.2em; color: #6ee7b7; margin-bottom: 16px; }
+  .result-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #334155; }
+  .result-row:last-child { border-bottom: none; }
+  .result-label { color: #94a3b8; }
+  .result-value { color: #6ee7b7; font-weight: 600; font-size: 1.1em; }
+  .result-value.negative { color: #f87171; }
+  .result-value.good { color: #4ade80; }
+  .footer { text-align: center; padding: 40px 20px; color: #64748b; font-size: 0.9em; }
+  .footer a { color: #6ee7b7; text-decoration: none; }
+  .footer a:hover { text-decoration: underline; }
+  .tagline { background: #0f172a; padding: 20px; text-align: center; color: #94a3b8; }
+  .metrics-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 16px; }
+  @media (max-width: 500px) { .metrics-grid { grid-template-columns: 1fr; } }
+  .metric-box { background: #0f172a; border-radius: 8px; padding: 12px; text-align: center; border: 1px solid #334155; }
+  .metric-label { font-size: 0.75em; color: #64748b; text-transform: uppercase; letter-spacing: 0.5px; }
+  .metric-value { font-size: 1.3em; font-weight: 700; margin-top: 4px; }
+  .comparison { background: #0f172a; border-radius: 8px; padding: 16px; margin-top: 16px; border: 1px solid #334155; }
+  .comparison h3 { color: #fbbf24; margin-bottom: 8px; font-size: 0.95em; }
+  .comparison p { color: #94a3b8; font-size: 0.9em; }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>CRE Cap Rate &amp; Cash Flow Calculator</h1>
+  <p>Calculate cap rates, cash-on-cash returns, and debt service for any commercial property. Free tool by Invernomuto.</p>
+</div>
+
+<div class="container">
+  <div class="grid">
+    <div>
+      <div class="card">
+        <h2>Property Details</h2>
+        <div class="field">
+          <label>Purchase Price ($)</label>
+          <input type="number" id="price" placeholder="e.g., 1500000" value="1500000">
+        </div>
+        <div class="field">
+          <label>Gross Annual Rental Income ($)</label>
+          <input type="number" id="income" placeholder="e.g., 180000" value="180000">
+        </div>
+        <div class="field">
+          <label>Operating Expenses / Year ($)</label>
+          <input type="number" id="expenses" placeholder="e.g., 54000" value="54000">
+        </div>
+        <div class="field">
+          <label>Annual Vacancy Rate (%)</label>
+          <input type="number" id="vacancy" placeholder="e.g., 5" value="5" step="0.1">
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="card">
+        <h2>Financing</h2>
+        <div class="field">
+          <label>Down Payment (%)</label>
+          <input type="number" id="downpayment" placeholder="e.g., 25" value="25" step="0.1">
+        </div>
+        <div class="field">
+          <label>Interest Rate (%)</label>
+          <input type="number" id="rate" placeholder="e.g., 7.0" value="7.0" step="0.05">
+        </div>
+        <div class="field">
+          <label>Loan Term (Years)</label>
+          <input type="number" id="term" placeholder="e.g., 25" value="25">
+        </div>
+        <div class="field">
+          <label>Other Annual Income ($)</label>
+          <input type="number" id="otherincome" placeholder="e.g., 5000" value="5000">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button class="btn" onclick="calculate()">Calculate Returns</button>
+
+  <div class="results" id="results" style="display:none; margin-top: 30px;">
+    <h2>Analysis Results</h2>
+    
+    <div class="metrics-grid">
+      <div class="metric-box">
+        <div class="metric-label">Cap Rate</div>
+        <div class="metric-value" id="caprate">—</div>
+      </div>
+      <div class="metric-box">
+        <div class="metric-label">Cash-on-Cash</div>
+        <div class="metric-value" id="coc">—</div>
+      </div>
+      <div class="metric-box">
+        <div class="metric-label">Cash Flow / Month</div>
+        <div class="metric-value" id="cashflow">—</div>
+      </div>
+    </div>
+
+    <div class="result-row">
+      <span class="result-label">Effective Gross Income</span>
+      <span class="result-value" id="egi">—</span>
+    </div>
+    <div class="result-row">
+      <span class="result-label">Net Operating Income (NOI)</span>
+      <span class="result-value" id="noi">—</span>
+    </div>
+    <div class="result-row">
+      <span class="result-label">Loan Amount</span>
+      <span class="result-value" id="loanamt">—</span>
+    </div>
+    <div class="result-row">
+      <span class="result-label">Annual Debt Service</span>
+      <span class="result-value" id="debt">—</span>
+    </div>
+    <div class="result-row">
+      <span class="result-label">Cash-on-Cash Return</span>
+      <span class="result-value" id="coc2">—</span>
+    </div>
+    <div class="result-row">
+      <span class="result-label">Equity Multiple (10 yr)</span>
+      <span class="result-value" id="eqmult">—</span>
+    </div>
+    <div class="result-row">
+      <span class="result-label">Total Cash Invested</span>
+      <span class="result-value" id="totalcash">—</span>
+    </div>
+
+    <div class="comparison">
+      <h3>💡 Market Benchmarks (2025-26)</h3>
+      <p><b>Average Cap Rates:</b> Multifamily 4.5–6.0% · Retail 5.5–7.5% · Office 5.0–7.0% · Industrial 4.5–6.5%</p>
+      <p style="margin-top:8px;"><b>If your cap rate is below the market average,</b> the property may be overpriced or you may need value-add strategies (lease-ups, expense reductions, renovations) to hit target returns.</p>
+    </div>
+  </div>
+</div>
+
+<div class="tagline">
+  <p>This tool is part of our <b>Commercial RE Listing AI System</b> — a free resource by Invernomuto.</p>
+  <p style="margin-top: 8px;">Need help analyzing deals fast? <a href="https://invernomuto2.gumroad.com/l/vegate">Get the full CRE system: 30 AI prompts + deal package workflow →</a></p>
+</div>
+
+<div class="footer">
+  <p>© 2026 Invernomuto. This tool is for educational purposes only. It does not constitute investment advice. Always consult a licensed commercial real estate professional before making investment decisions.</p>
+</div>
+
+<script>
+function calculate() {
+  const price = parseFloat(document.getElementById('price').value) || 0;
+  const income = parseFloat(document.getElementById('income').value) || 0;
+  const expenses = parseFloat(document.getElementById('expenses').value) || 0;
+  const vacancy = parseFloat(document.getElementById('vacancy').value) || 0;
+  const downpct = parseFloat(document.getElementById('downpayment').value) || 0;
+  const rate = parseFloat(document.getElementById('rate').value) || 0;
+  const term = parseFloat(document.getElementById('term').value) || 0;
+  const otherIncome = parseFloat(document.getElementById('otherincome').value) || 0;
+
+  // Effective Gross Income
+  const vacancyLoss = income * (vacancy / 100);
+  const egi = income - vacancyLoss + otherIncome;
+  
+  // Net Operating Income
+  const noi = egi - expenses;
+  
+  // Cap Rate
+  const capRate = price > 0 ? (noi / price) * 100 : 0;
+  
+  // Loan details
+  const downPayment = price * (downpct / 100);
+  const loanAmount = price - downPayment;
+  
+  // Monthly mortgage payment (amortization)
+  const monthlyRate = rate / 100 / 12;
+  const numPayments = term * 12;
+  let monthlyPayment = 0;
+  if (rate > 0 && numPayments > 0) {
+    monthlyPayment = loanAmount * (monthlyRate * Math.pow(1 + monthlyRate, numPayments)) / (Math.pow(1 + monthlyRate, numPayments) - 1);
+  }
+  const annualDebtService = monthlyPayment * 12;
+  
+  // Cash flow
+  const annualCashFlow = noi - annualDebtService;
+  const monthlyCashFlow = annualCashFlow / 12;
+  
+  // Cash-on-Cash return
+  const coc = downPayment > 0 ? (annualCashFlow / downPayment) * 100 : 0;
+  
+  // Equity multiple (10 year)
+  const totalCashInvested = downPayment + 5000; // + closing costs estimate
+  const totalCashOnLoan = annualCashFlow * 10;
+  const remainingValue = price * 1.5; // 50% appreciation over 10 years (assumption)
+  const equityMultiple = (totalCashOnLoan + remainingValue) / totalCashInvested;
+
+  // Display results
+  document.getElementById('results').style.display = 'block';
+  document.getElementById('caprate').textContent = capRate.toFixed(2) + '%';
+  document.getElementById('caprate').style.color = capRate >= 5 ? '#4ade80' : capRate >= 3.5 ? '#fbbf24' : '#f87171';
+  
+  document.getElementById('coc').textContent = coc.toFixed(2) + '%';
+  document.getElementById('coc').style.color = coc >= 8 ? '#4ade80' : coc >= 4 ? '#fbbf24' : '#f87171';
+  
+  document.getElementById('cashflow').textContent = '$' + monthlyCashFlow.toLocaleString('en-US', {minimumFractionDigits: 0, maximumFractionDigits: 0});
+  document.getElementById('cashflow').style.color = monthlyCashFlow >= 0 ? '#4ade80' : '#f87171';
+  
+  document.getElementById('egi').textContent = '$' + Math.round(egi).toLocaleString();
+  document.getElementById('noi').textContent = '$' + Math.round(noi).toLocaleString();
+  document.getElementById('loanamt').textContent = '$' + Math.round(loanAmount).toLocaleString();
+  document.getElementById('debt').textContent = '$' + Math.round(annualDebtService).toLocaleString();
+  document.getElementById('coc2').textContent = coc.toFixed(2) + '%';
+  document.getElementById('coc2').className = 'result-value ' + (coc >= 8 ? 'good' : coc >= 4 ? '' : 'negative');
+  document.getElementById('eqmult').textContent = equityMultiple.toFixed(2) + 'x';
+  document.getElementById('totalcash').textContent = '$' + totalCashInvested.toLocaleString();
+
+  // Scroll to results
+  document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+</script>
+
+</body>
+</html>
