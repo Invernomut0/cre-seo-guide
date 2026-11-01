@@ -12,6 +12,9 @@ Calculate capitalization rates for any commercial property. Input address, incom
 ### [CRE Investment Framework — 5-Step Guide](cre-investment-framework.html)
 5 essential steps for commercial property investment analysis + 3 AI prompts. Includes Cap Rate calculations.
 
+### [E-commerce AI Tools Comparison (2026)](ecommerce-ai-tools-2026.html)
+Subscription vs. one-time pricing for e-commerce sellers. Real costs from 5 tools (Helium 10 $99/mo, Jasper $59/mo, ChatGPT Plus $20/mo) vs. our $49 one-time system.
+
 ---
 
 ## 💰 Paid Systems (One-Time Purchase)
