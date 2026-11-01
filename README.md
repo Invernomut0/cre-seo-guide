@@ -23,7 +23,7 @@ Subscription vs. one-time pricing for e-commerce sellers. Real costs from 5 tool
 **30 prompts for CRE descriptions + investment analysis. Cap Rate + marketing materials in 15 minutes.**
 Use code **CRE50** for 50% off → **$19.50**. Lowest price ever.
 
-### [Complete AI Bundle — $99](https://invernomut02.gumroad.com/l/bundle)
+### [Complete AI Bundle — $99](https://invernomuto2.gumroad.com)
 All 3 systems (RE + SPED + CRE) = 92 prompts. Save $58. Use code **CRE50** → **$49.50**.
 
 ---
@@ -31,7 +31,7 @@ All 3 systems (RE + SPED + CRE) = 92 prompts. Save $58. Use code **CRE50** → *
 ## 🔗 Cross-Links
 - [RE Listing System](https://invernomuto2.gumroad.com/l/geffl) — 32 prompts for MLS-ready listings. Fair-housing safe. Use code **LAUNCH50** → $29.
 - [SPED IEP System](https://invernomuto2.gumroad.com/l/uplrym) — 32 prompts for IDEA-compliant IEPs. Use code **SPED50** → $29.
-- [E-commerce Listing System](https://invernomut02.gumroad.com/l/ecommerce-product-listing) — 32 prompts for Amazon, Shopify, Etsy. 3-phase workflow. $49.
+- [E-commerce Listing System](https://invernomuto2.gumroad.com) — 32 prompts for Amazon, Shopify, Etsy. 3-phase workflow. $49.
 
 ---
 
